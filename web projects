@@ -1,1 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRANDISH - Farm to Table Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.9) 0%, rgba(59, 130, 246, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .success-popup, .order-confirmed {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .vegetable-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        .vegetable-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quantity-btn {
+            transition: all 0.2s ease;
+        }
+        
+        .quantity-btn:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .form-section {
+            animation: slideIn 0.4s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .scroll-smooth {
+            scroll-behavior: smooth;
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 40;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .testimonial-card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 scroll-smooth">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-leaf text-green-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">BRANDISH</span>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-8">
+                    <a href="#features" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-green-600 transition">Features</a>
+                    <a href="#how-it-works" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-green-600 transition">How It Works</a>
+                    <a href="#testimonials" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-green-600 transition">Testimonials</a>
+                    <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-green-600 transition">About</a>
+                </div>
+                <div class="sm:hidden flex items-center">
+                    <button onclick="toggleMobileMenu()" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden sm:hidden bg-white border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#features" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Features</a>
+                <a href="#how-it-works" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">How It Works</a>
+                <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">Testimonials</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50">About</a>
+                <button onclick="showUserTypeSelection()" class="w-full text-left px-3 py-2 rounded-md text-base font-medium text-white bg-green-600 hover:bg-green-700">
+                    Get Started
+                </button>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <div class="hero-gradient text-white">
+        <div class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                    Farm Fresh, Direct to Your Doorstep
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-xl">
+                    BRANDISH connects you directly with local farmers across India, ensuring fresh produce at fair prices while supporting sustainable agriculture.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button onclick="showUserTypeSelection()" class="px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition flex items-center justify-center">
+                        <i class="fas fa-play-circle mr-2"></i> Get Started
+                    </button>
+                    <a href="#features" class="px-8 py-3 border border-white text-base font-medium rounded-md text-white hover:bg-white hover:bg-opacity-10 md:py-4 md:text-lg md:px-10 transition flex items-center justify-center">
+                        <i class="fas fa-info-circle mr-2"></i> Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="bg-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stats-card bg-green-50 p-6 rounded-lg text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600">
+                        <i class="fas fa-tractor text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-3xl font-bold text-gray-900">5,000+</h3>
+                    <p class="mt-2 text-gray-600">Farmers Connected</p>
+                </div>
+                <div class="stats-card bg-blue-50 p-6 rounded-lg text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                        <i class="fas fa-home text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-3xl font-bold text-gray-900">50,000+</h3>
+                    <p class="mt-2 text-gray-600">Happy Families</p>
+                </div>
+                <div class="stats-card bg-yellow-50 p-6 rounded-lg text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 text-yellow-600">
+                        <i class="fas fa-rupee-sign text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-3xl font-bold text-gray-900">₹10M+</h3>
+                    <p class="mt-2 text-gray-600">Saved for Farmers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    Why Choose BRANDISH?
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-gray-500">
+                    We're revolutionizing the way India gets its fresh produce
+                </p>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-100 text-green-600">
+                        <i class="fas fa-leaf text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Farm Fresh Produce</h3>
+                    <p class="mt-2 text-gray-500">
+                        Get vegetables harvested within 24 hours, straight from farms to your kitchen.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 text-blue-600">
+                        <i class="fas fa-hand-holding-usd text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Fair Prices</h3>
+                    <p class="mt-2 text-gray-500">
+                        Farmers get better prices while you save up to 30% compared to supermarkets.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-100 text-yellow-600">
+                        <i class="fas fa-truck text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Fast Delivery</h3>
+                    <p class="mt-2 text-gray-500">
+                        Next-day delivery in most cities, with temperature-controlled logistics.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-purple-100 text-purple-600">
+                        <i class="fas fa-seedling text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Organic Options</h3>
+                    <p class="mt-2 text-gray-500">
+                        Choose from a wide range of certified organic produce from trusted farms.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-red-100 text-red-600">
+                        <i class="fas fa-heart text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Support Farmers</h3>
+                    <p class="mt-2 text-gray-500">
+                        Your purchase directly supports small and marginal farmers across India.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-100 text-indigo-600">
+                        <i class="fas fa-recycle text-xl"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">Sustainable</h3>
+                    <p class="mt-2 text-gray-500">
+                        Eco-friendly packaging and reduced food miles for a greener planet.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works Section -->
+    <div id="how-it-works" class="bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    How BRANDISH Works
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-gray-500">
+                    Simple steps to get fresh produce from farm to table
+                </p>
+            </div>
+            
+            <div class="mt-16">
+                <div class="relative">
+                    <!-- Timeline line -->
+                    <div class="hidden md:block absolute top-0 left-1/2 h-full w-1 bg-gray-200 transform -translate-x-1/2"></div>
+                    
+                    <!-- Steps -->
+                    <div class="relative space-y-10 md:space-y-0">
+                        <!-- Step 1 -->
+                        <div class="md:flex justify-center items-center">
+                            <div class="md:w-1/2 md:pr-16 text-center md:text-right mb-8 md:mb-0">
+                                <h3 class="text-xl font-bold text-gray-900">1. Farmers List Their Produce</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Local farmers register on our platform and list their fresh harvest with prices.
+                                </p>
+                            </div>
+                            <div class="md:w-1/2 md:pl-16 flex justify-center">
+                                <div class="h-24 w-24 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-3xl">
+                                    <i class="fas fa-tractor"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div class="md:flex justify-center items-center">
+                            <div class="md:w-1/2 md:pl-16 order-2 md:order-1 flex justify-center">
+                                <div class="h-24 w-24 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-3xl">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pr-16 order-1 md:order-2 text-center md:text-left mb-8 md:mb-0">
+                                <h3 class="text-xl font-bold text-gray-900">2. Consumers Browse & Order</h3>
+                                <p class="mt-2 text-gray-600">
+                                    You browse available produce, select items, and place your order through our app or website.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="md:flex justify-center items-center">
+                            <div class="md:w-1/2 md:pr-16 text-center md:text-right mb-8 md:mb-0">
+                                <h3 class="text-xl font-bold text-gray-900">3. Smart Logistics</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Our system matches your order with the nearest farmer and arranges for pickup.
+                                </p>
+                            </div>
+                            <div class="md:w-1/2 md:pl-16 flex justify-center">
+                                <div class="h-24 w-24 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 text-3xl">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4 -->
+                        <div class="md:flex justify-center items-center">
+                            <div class="md:w-1/2 md:pl-16 order-2 md:order-1 flex justify-center">
+                                <div class="h-24 w-24 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 text-3xl">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                            </div>
+                            <div class="md:w-1/2 md:pr-16 order-1 md:order-2 text-center md:text-left mb-8 md:mb-0">
+                                <h3 class="text-xl font-bold text-gray-900">4. Fresh Delivery</h3>
+                                <p class="mt-2 text-gray-600">
+                                    Your fresh produce arrives at your doorstep within 24 hours of harvest.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div id="testimonials" class="bg-gray-50 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                    What People Are Saying
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-gray-500">
+                    Hear from our farmers and customers
+                </p>
+            </div>
+            
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Rajesh Patel</h4>
+                            <p class="text-gray-500">Farmer from Gujarat</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-gray-600 italic">
+                        "BRANDISH has changed my life. I now get fair prices for my tomatoes without middlemen taking most of the profit."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-white p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Priya Sharma</h4>
+                            <p class="text-gray-500">Customer from Bangalore</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-gray-600 italic">
+                        "The vegetables are so fresh! I can taste the difference compared to supermarket produce. And the prices are great too."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card bg-white p-6 rounded-lg">
+                    <div class="flex items-center">
+                        <div class="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-gray-900">Sunita Devi</h4>
+                            <p class="text-gray-500">Farmer from Bihar</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-gray-600 italic">
+                        "For the first time, I feel my hard work is valued. BRANDISH connects me directly with customers who appreciate organic farming."
+                    </p>
+                    <div class="mt-4 flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-green-600 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+                    Ready to experience farm-fresh goodness?
+                </h2>
+                <p class="mt-6 max-w-2xl mx-auto text-lg">
+                    Join thousands of happy farmers and customers across India
+                </p>
+                <div class="mt-10 flex justify-center">
+                    <button onclick="showUserTypeSelection()" class="px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition">
+                        Get Started Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Type Selection (Hidden Initially) -->
+    <div id="userTypeSelection" class="hidden max-w-md mx-auto my-16 p-8 bg-white rounded-lg shadow-lg form-section">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">I am a...</h2>
+        <div class="flex flex-col space-y-4">
+            <button onclick="showFarmerForm()" class="px-6 py-4 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition flex items-center justify-center">
+                <i class="fas fa-tractor mr-2"></i> Farmer (Want to sell produce)
+            </button>
+            <button onclick="showConsumerForm()" class="px-6 py-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition flex items-center justify-center">
+                <i class="fas fa-shopping-basket mr-2"></i> Consumer (Want to buy fresh produce)
+            </button>
+        </div>
+    </div>
+
+    <!-- Farmer Form (Hidden Initially) -->
+    <div id="farmerForm" class="hidden max-w-2xl mx-auto my-16 p-8 bg-white rounded-lg shadow-lg form-section">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Farmer Registration</h2>
+        <form id="farmerRegistrationForm" class="space-y-6">
+            <div>
+                <label for="farmerName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" id="farmerName" name="farmerName" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="farmerPhone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="farmerPhone" name="farmerPhone" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                </div>
+                <div>
+                    <label for="farmerState" class="block text-sm font-medium text-gray-700">State</label>
+                    <select id="farmerState" name="farmerState" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                        <option value="">Select State</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="tamilnadu">Tamil Nadu</option>
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="gujarat">Gujarat</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="bihar">Bihar</option>
+                        <option value="westbengal">West Bengal</option>
+                        <option value="andhra">Andhra Pradesh</option>
+                        <option value="telangana">Telangana</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div>
+                <label for="farmerAddress" class="block text-sm font-medium text-gray-700">Farm Address</label>
+                <textarea id="farmerAddress" name="farmerAddress" rows="3" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500"></textarea>
+            </div>
+            
+            <div>
+                <label for="farmerCategories" class="block text-sm font-medium text-gray-700">Categories (Vegetables you grow)</label>
+                <select id="farmerCategories" name="farmerCategories" multiple class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                    <option value="tomato">Tomato</option>
+                    <option value="potato">Potato</option>
+                    <option value="onion">Onion</option>
+                    <option value="carrot">Carrot</option>
+                    <option value="cabbage">Cabbage</option>
+                    <option value="cauliflower">Cauliflower</option>
+                    <option value="brinjal">Brinjal</option>
+                    <option value="ladyfinger">Ladyfinger</option>
+                    <option value="cucumber">Cucumber</option>
+                    <option value="spinach">Spinach</option>
+                </select>
+                <p class="mt-1 text-sm text-gray-500">Hold Ctrl/Cmd to select multiple options</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="farmerRate" class="block text-sm font-medium text-gray-700">Rate per Kilogram (₹)</label>
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="text-gray-500 sm:text-sm">₹</span>
+                        </div>
+                        <input type="number" id="farmerRate" name="farmerRate" min="1" required class="focus:ring-green-500 focus:border-green-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md py-2 px-3">
+                    </div>
+                </div>
+                <div>
+                    <label for="farmerAmount" class="block text-sm font-medium text-gray-700">Available Amount (kg)</label>
+                    <input type="number" id="farmerAmount" name="farmerAmount" min="1" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                </div>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Farming Method</label>
+                <div class="mt-2 space-y-2">
+                    <div class="flex items-center">
+                        <input id="organic" name="farmingMethod" type="radio" value="organic" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300">
+                        <label for="organic" class="ml-3 block text-sm font-medium text-gray-700">Organic</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="traditional" name="farmingMethod" type="radio" value="traditional" checked class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300">
+                        <label for="traditional" class="ml-3 block text-sm font-medium text-gray-700">Traditional</label>
+                    </div>
+                    <div class="flex items-center">
+                        <input id="mixed" name="farmingMethod" type="radio" value="mixed" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300">
+                        <label for="mixed" class="ml-3 block text-sm font-medium text-gray-700">Mixed</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button type="button" onclick="backToUserType()" class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    Back
+                </button>
+                <button type="submit" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Consumer Form (Hidden Initially) -->
+    <div id="consumerForm" class="hidden max-w-4xl mx-auto my-16 p-8 bg-white rounded-lg shadow-lg form-section">
+        <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Consumer Registration</h2>
+        <form id="consumerRegistrationForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="consumerName" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="consumerName" name="consumerName" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                
+                <div>
+                    <label for="consumerPhone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="consumerPhone" name="consumerPhone" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+            
+            <div>
+                <label for="consumerAddress" class="block text-sm font-medium text-gray-700">Delivery Address</label>
+                <textarea id="consumerAddress" name="consumerAddress" rows="3" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="consumerCity" class="block text-sm font-medium text-gray-700">City</label>
+                    <input type="text" id="consumerCity" name="consumerCity" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                
+                <div>
+                    <label for="consumerPincode" class="block text-sm font-medium text-gray-700">Pincode</label>
+                    <input type="text" id="consumerPincode" name="consumerPincode" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+            
+            <div class="pt-4 border-t border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Available Vegetables</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4" id="vegetableSelection">
+                    <!-- Vegetable cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="pt-4 border-t border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900 mb-2">Order Summary</h3>
+                <div id="orderSummary" class="bg-gray-50 p-4 rounded-lg">
+                    <p class="text-gray-600">No items selected yet</p>
+                    <div id="selectedItems" class="hidden mt-2 space-y-2"></div>
+                    <div id="totalAmount" class="hidden mt-4 pt-2 border-t border-gray-200 font-bold text-lg text-blue-600"></div>
+                </div>
+            </div>
+            
+            <div id="paymentSection" class="hidden pt-4 border-t border-gray-200">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Payment Details</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Payment Method</label>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-center">
+                                <input id="upi" name="paymentMethod" type="radio" checked class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                <label for="upi" class="ml-3 block text-sm font-medium text-gray-700">UPI</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="card" name="paymentMethod" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                <label for="card" class="ml-3 block text-sm font-medium text-gray-700">Credit/Debit Card</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="cod" name="paymentMethod" type="radio" class="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300">
+                                <label for="cod" class="ml-3 block text-sm font-medium text-gray-700">Cash on Delivery</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="upiDetails" class="space-y-4">
+                        <div>
+                            <label for="upiId" class="block text-sm font-medium text-gray-700">UPI ID</label>
+                            <input type="text" id="upiId" name="upiId" placeholder="yourname@upi" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                    
+                    <div id="cardDetails" class="hidden space-y-4">
+                        <div>
+                            <label for="cardNumber" class="block text-sm font-medium text-gray-700">Card Number</label>
+                            <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label for="expiryDate" class="block text-sm font-medium text-gray-700">Expiry Date</label>
+                                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                            <div>
+                                <label for="cvv" class="block text-sm font-medium text-gray-700">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button type="button" onclick="backToUserType()" class="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Back
+                </button>
+                <button type="submit" id="consumerSubmitBtn" class="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Complete Order
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Success Popup (Hidden Initially) -->
+    <div id="successPopup" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="success-popup bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                <i class="fas fa-check text-green-600 text-xl"></i>
+            </div>
+            <h3 class="mt-3 text-lg font-medium text-gray-900">Success!</h3>
+            <div class="mt-2">
+                <p class="text-sm text-gray-500">Your information has been successfully submitted. Our team will contact you within 24 hours.</p>
+            </div>
+            <div class="mt-5">
+                <button type="button" onclick="closeSuccessPopup()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    Return to Homepage
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmed Popup (Hidden Initially) -->
+    <div id="orderConfirmed" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="order-confirmed bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-blue-100">
+                <i class="fas fa-shopping-bag text-blue-600 text-xl"></i>
+            </div>
+            <h3 class="mt-3 text-lg font-medium text-gray-900">Order Confirmed!</h3>
+            <div class="mt-2">
+                <p class="text-sm text-gray-500">Your order has been placed successfully. Fresh produce will be delivered to your address within 24 hours.</p>
+                <p class="mt-2 text-sm font-medium text-gray-700">Order ID: <span id="orderId" class="text-blue-600">BRD-</span></p>
+            </div>
+            <div class="mt-5">
+                <button type="button" onclick="closeOrderConfirmed()" class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Return to Homepage
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div id="about" class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="text-center">
+            <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                About BRANDISH
+            </h2>
+            <div class="mt-10 max-w-2xl mx-auto text-gray-500">
+                <p class="mb-6">
+                    BRANDISH is an innovative platform connecting local farmers directly with consumers across India. 
+                    Our mission is to eliminate middlemen, ensuring fair prices for farmers and fresh produce for consumers.
+                </p>
+                <div class="mt-8 border-t border-gray-200 pt-8">
+                    <h3 class="text-xl font-medium text-gray-900">Our Founders</h3>
+                    <div class="mt-6 grid grid-cols-1 gap-8 sm:grid-cols-2">
+                        <div class="flex flex-col items-center">
+                            <div class="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-3xl font-bold text-gray-600">AJ</div>
+                            <h4 class="mt-4 text-lg font-medium text-gray-900">Amit Joshi</h4>
+                            <p class="mt-1 text-gray-500">Co-Founder & CEO</p>
+                            <p class="mt-2 text-sm text-gray-500">Former agri-tech entrepreneur with 10+ years experience in supply chain optimization</p>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div class="h-24 w-24 rounded-full bg-gray-200 flex items-center justify-center text-3xl font-bold text-gray-600">PK</div>
+                            <h4 class="mt-4 text-lg font-medium text-gray-900">Priya Kumar</h4>
+                            <p class="mt-1 text-gray-500">Co-Founder & CTO</p>
+                            <p class="mt-2 text-sm text-gray-500">Ex-Google engineer passionate about using technology to solve real-world problems</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 border-t border-gray-200 pt-8">
+                    <h3 class="text-xl font-medium text-gray-900">Connect With Us</h3>
+                    <div class="mt-6 flex justify-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-gray-500">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Get Started Button -->
+    <button onclick="showUserTypeSelection()" class="floating-btn h-14 w-14 rounded-full bg-green-600 text-white flex items-center justify-center text-xl">
+        <i class="fas fa-shopping-basket"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 mt-12">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="flex flex-col">
+                    <div class="flex items-center">
+                        <i class="fas fa-leaf text-green-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-white">BRANDISH</span>
+                    </div>
+                    <p class="mt-4 text-gray-300">
+                        Connecting farmers with consumers across India
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-white">For Farmers</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">How to Sell</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Pricing</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-white">For Consumers</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white">How to Buy</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Delivery Areas</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium text-white">Company</h3>
+                    <ul class="mt-4 space-y-2">
+                        <li><a href="#about" class="text-gray-300 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-12 border-t border-gray-700 pt-8">
+                <p class="text-center text-gray-400 text-sm">
+                    &copy; 2023 BRANDISH. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample vegetable data with prices (in ₹ per kg)
+        const vegetables = [
+            { id: 1, name: "Tomato", price: 30, image: "🍅", organic: true },
+            { id: 2, name: "Potato", price: 25, image: "🥔", organic: false },
+            { id: 3, name: "Onion", price: 35, image: "🧅", organic: true },
+            { id: 4, name: "Carrot", price: 40, image: "🥕", organic: true },
+            { id: 5, name: "Cabbage", price: 20, image: "🥬", organic: false },
+            { id: 6, name: "Cauliflower", price: 30, image: "🥦", organic: true },
+            { id: 7, name: "Brinjal", price: 35, image: "🍆", organic: false },
+            { id: 8, name: "Ladyfinger", price: 45, image: "🫛", organic: true },
+            { id: 9, name: "Cucumber", price: 25, image: "🥒", organic: false },
+            { id: 10, name: "Spinach", price: 30, image: "🌿", organic: true }
+        ];
+
+        // Selected items by consumer
+        let selectedItems = [];
+
+        // DOM Elements
+        const userTypeSelection = document.getElementById('userTypeSelection');
+        const farmerForm = document.getElementById('farmerForm');
+        const consumerForm = document.getElementById('consumerForm');
+        const successPopup = document.getElementById('successPopup');
+        const orderConfirmed = document.getElementById('orderConfirmed');
+        const vegetableSelection = document.getElementById('vegetableSelection');
+        const orderSummary = document.getElementById('orderSummary');
+        const selectedItemsDiv = document.getElementById('selectedItems');
+        const totalAmountDiv = document.getElementById('totalAmount');
+        const paymentSection = document.getElementById('paymentSection');
+        const upiDetails = document.getElementById('upiDetails');
+        const cardDetails = document.getElementById('cardDetails');
+        const consumerSubmitBtn = document.getElementById('consumerSubmitBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        // Payment method radio buttons
+        const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render vegetable cards
+            renderVegetableCards();
+            
+            // Set up payment method toggle
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    if (this.id === 'upi') {
+                        upiDetails.classList.remove('hidden');
+                        cardDetails.classList.add('hidden');
+                    } else if (this.id === 'card') {
+                        upiDetails.classList.add('hidden');
+                        cardDetails.classList.remove('hidden');
+                    } else {
+                        upiDetails.classList.add('hidden');
+                        cardDetails.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // Scroll to forms smoothly
+            const forms = [userTypeSelection, farmerForm, consumerForm];
+            forms.forEach(form => {
+                if (form) {
+                    form.scrollIntoView = function() {
+                        this.classList.remove('hidden');
+                        window.scrollTo({
+                            top: this.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    };
+                }
+            });
+        });
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Show user type selection
+        function showUserTypeSelection() {
+            mobileMenu.classList.add('hidden');
+            userTypeSelection.classList.remove('hidden');
+            farmerForm.classList.add('hidden');
+            consumerForm.classList.add('hidden');
+            userTypeSelection.scrollIntoView();
+        }
+
+        // Show farmer form
+        function showFarmerForm() {
+            userTypeSelection.classList.add('hidden');
+            farmerForm.classList.remove('hidden');
+            consumerForm.classList.add('hidden');
+            farmerForm.scrollIntoView();
+        }
+
+        // Show consumer form
+        function showConsumerForm() {
+            userTypeSelection.classList.add('hidden');
+            farmerForm.classList.add('hidden');
+            consumerForm.classList.remove('hidden');
+            consumerForm.scrollIntoView();
+        }
+
+        // Back to user type selection
+        function backToUserType() {
+            showUserTypeSelection();
+        }
+
+        // Close success popup
+        function closeSuccessPopup() {
+            successPopup.classList.add('hidden');
+            showUserTypeSelection();
+        }
+
+        // Close order confirmed popup
+        function closeOrderConfirmed() {
+            orderConfirmed.classList.add('hidden');
+            showUserTypeSelection();
+            // Reset consumer form
+            document.getElementById('consumerRegistrationForm').reset();
+            selectedItems = [];
+            updateOrderSummary();
+            
+            // Reset quantities
+            vegetables.forEach(veg => {
+                document.getElementById(`quantity-${veg.id}`).textContent = '0';
+            });
+        }
+
+        // Render vegetable cards
+        function renderVegetableCards() {
+            vegetableSelection.innerHTML = '';
+            vegetables.forEach(veg => {
+                const card = document.createElement('div');
+                card.className = 'vegetable-card bg-white p-4 rounded-lg border border-gray-200 cursor-pointer';
+                card.innerHTML = `
+                    <div class="text-4xl text-center mb-2">${veg.image}</div>
+                    <h4 class="text-lg font-medium text-center">${veg.name}</h4>
+                    <p class="text-center text-gray-600 mt-1">₹${veg.price}/kg</p>
+                    ${veg.organic ? '<p class="text-center text-xs text-green-600 mt-1">Organic</p>' : ''}
+                    <div class="mt-3 flex items-center justify-center">
+                        <button onclick="decreaseQuantity(${veg.id})" class="quantity-btn px-2 py-1 bg-gray-200 rounded-l-md">-</button>
+                        <span id="quantity-${veg.id}" class="px-3 py-1 bg-gray-100">0</span>
+                        <button onclick="increaseQuantity(${veg.id})" class="quantity-btn px-2 py-1 bg-gray-200 rounded-r-md">+</button>
+                    </div>
+                `;
+                vegetableSelection.appendChild(card);
+            });
+        }
+
+        // Increase vegetable quantity
+        function increaseQuantity(id) {
+            const veg = vegetables.find(v => v.id === id);
+            const existingItem = selectedItems.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                selectedItems.push({
+                    id: veg.id,
+                    name: veg.name,
+                    price: veg.price,
+                    quantity: 1,
+                    organic: veg.organic
+                });
+            }
+            
+            document.getElementById(`quantity-${id}`).textContent = 
+                selectedItems.find(item => item.id === id)?.quantity || 0;
+            
+            updateOrderSummary();
+        }
+
+        // Decrease vegetable quantity
+        function decreaseQuantity(id) {
+            const existingItem = selectedItems.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity -= 1;
+                
+                if (existingItem.quantity <= 0) {
+                    selectedItems = selectedItems.filter(item => item.id !== id);
+                }
+            }
+            
+            document.getElementById(`quantity-${id}`).textContent = 
+                selectedItems.find(item => item.id === id)?.quantity || 0;
+            
+            updateOrderSummary();
+        }
+
+        // Update order summary
+        function updateOrderSummary() {
+            if (selectedItems.length === 0) {
+                orderSummary.querySelector('p').classList.remove('hidden');
+                selectedItemsDiv.classList.add('hidden');
+                totalAmountDiv.classList.add('hidden');
+                paymentSection.classList.add('hidden');
+                consumerSubmitBtn.disabled = true;
+            } else {
+                orderSummary.querySelector('p').classList.add('hidden');
+                selectedItemsDiv.classList.remove('hidden');
+                totalAmountDiv.classList.remove('hidden');
+                paymentSection.classList.remove('hidden');
+                consumerSubmitBtn.disabled = false;
+                
+                // Update selected items list
+                selectedItemsDiv.innerHTML = '';
+                let total = 0;
+                
+                selectedItems.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'flex justify-between';
+                    itemDiv.innerHTML = `
+                        <span>${item.name} ${item.organic ? '(Organic)' : ''} (${item.quantity} kg)</span>
+                        <span>₹${itemTotal}</span>
+                    `;
+                    selectedItemsDiv.appendChild(itemDiv);
+                });
+                
+                // Update total
+                totalAmountDiv.innerHTML = `Total: ₹${total}`;
+            }
+        }
+
+        // Farmer form submission
+        document.getElementById('
+</body>
+</html>
