@@ -39,27 +39,25 @@ Step 2: 1 + 0 = 1
 
 ANSWER>>
 #include<iostream>
-int add(int n)
+using namespace std;
+
+int addrepetitive(int n)
 {
-     int x=0;
-    if(n>9)
+    while (n >9)
     {
-        if(n>0)
+        int sum = 0;
+        while (n > 0) 
         {
-            x=x+n%10;
-            n=n/10;
+            sum = sum + n % 10;
+            n = n / 10;    
         }
-        else
-        {
-            x=x+n;
-        }
-        return(x);
+        n = sum;
     }
-    return (n);
+    return n;
 }
 
 int main()
 {
-    int n=5;
-    std::cout<<"repetitive addition of digits of number "<<n<<" = "<<add(n);
+    int n=9;
+    cout << "Single digit after repetitive addition: " << addrepetitive(n);
 }
