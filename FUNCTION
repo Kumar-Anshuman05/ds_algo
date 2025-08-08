@@ -1,3 +1,5 @@
+Q. FIND THE FACTORIAL OF A GIVEN NUMBER USING FUNCTION ONLY(NO FOR , WHILE LOOP)IN C++
+
 #include<iostream>
 using namespace std ;
 int factorial(int n)
