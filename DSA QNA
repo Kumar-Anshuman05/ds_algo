@@ -61,3 +61,33 @@ int main()
     int n=9;
     cout << "Single digit after repetitive addition: " << addrepetitive(n);
 }
+
+
+ANSWER2>>
+#include <iostream>
+using namespace std;
+int adddigits(int n)
+{
+    int sum = 0;
+        while (n > 0) 
+        {
+            sum = sum + n % 10;
+            n = n / 10;    
+        }
+        n = sum;
+    return n;
+}
+int addrepetitive(int m)
+{
+    while (m > 9)
+    {
+      m=adddigits(m);
+    }
+    return m;
+}
+
+int main()
+{
+    int n=915;
+    cout << "Single digit after repetitive addition: " << addrepetitive(n);
+}
