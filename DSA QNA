@@ -91,3 +91,6 @@ int main()
     int n=915;
     cout << "Single digit after repetitive addition: " << addrepetitive(n);
 }
+
+
+Given a non-negative number represented as an array of digits. The is to add 1 to the number (increment the number represented by the digits by 1). The digits are stored such that the most significant digit is the first element of the array
