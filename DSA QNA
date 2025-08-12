@@ -93,8 +93,8 @@ int main()
 }
 
 
-q3. Find the pow ; user input ?
-answer>>
+Q3. Find the pow ; user input ?
+ANSWER1>>
 #include<iostream>
 using namespace std;
 
@@ -104,6 +104,30 @@ long int POW(int b,int e)
    for(int i=1;i<=e;i++)
    {
        ans=ans*b;
+   }
+   return(ans);
+}
+
+int main()
+{
+    int b,e;
+    cout<<"enter the base- ";
+    cin>>b;
+    cout<<"enter the exponential- ";
+    cin>>e;
+    cout<<"output is = "<<POW(b,e)<<endl;
+}
+
+ANSWER2>>
+#include<iostream>
+using namespace std;
+
+long int POW(int b,int e)
+{
+   int ans=b;
+   if(e>1)
+   {
+      return ans*POW(ans,(e-1));
    }
    return(ans);
 }
