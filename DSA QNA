@@ -93,4 +93,27 @@ int main()
 }
 
 
-Given a non-negative number represented as an array of digits. The is to add 1 to the number (increment the number represented by the digits by 1). The digits are stored such that the most significant digit is the first element of the array
+q3. Find the pow ; user input ?
+answer>>
+#include<iostream>
+using namespace std;
+
+long int POW(int b,int e)
+{
+   long int ans=1;
+   for(int i=1;i<=e;i++)
+   {
+       ans=ans*b;
+   }
+   return(ans);
+}
+
+int main()
+{
+    int b,e;
+    cout<<"enter the base- ";
+    cin>>b;
+    cout<<"enter the exponential- ";
+    cin>>e;
+    cout<<"output is = "<<POW(b,e)<<endl;
+}
