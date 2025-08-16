@@ -1,10 +1,3 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 
 #include <iostream>
 #include <climits>
@@ -85,40 +78,3 @@ react(arr);
 }
 
 
-
-#include<iostream>
-using namespace std;
-
-void sort(int arr[],int n)
-{
-    int a;
-    for(int j=0;j<n-1;j++)
-  {
-      for(int i=0;i<n-j-1;i++)
-      {
-        if (arr[i]>arr[i+1])
-         {
-            a=arr[i];
-            arr[i]=arr[i+1];
-            arr[i+1]=a;
-         }
-      }
-  }
-}
- void printarr(int arr[],int n)
- {
-     for(int i=0;i<n;i++)
-     {
-         cout<<arr[i]<<",";
-     }
-     cout<<endl;
- }
-
-int main()
-{
-    int arr[] = {3,9,1,41,10,25,7};
-    int size= sizeof(arr)/sizeof(int);
-    sort(arr,size);
-    cout<<"sorted array is: "<<endl;
-    printarr(arr,size);
-}
