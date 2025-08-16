@@ -141,3 +141,39 @@ int main()
     cin>>e;
     cout<<"output is = "<<POW(b,e)<<endl;
 }
+
+Q.FIND THE Nth TERM OF FIBONACCI SERIES ?
+
+ANSWER>>
+#include<iostream>
+using namespace std;
+
+int fibonacci(int n)
+{
+   if(n<2)
+   {
+       return(n);
+   }
+   int x=0 , y=1 ,z;
+   for(int i=2;i<=n;i++)
+   {
+       z=x+y;
+       x=y;
+       y=z;
+   }
+   return(z);
+}
+
+
+int main()
+{
+    int n;
+    cout<<"position = ";
+    cin>>n;
+    cout << n << " th position of fibonacci series is: " << fibonacci(n) << endl;
+}
+
+
+WITH RECURSION
+ANSWER>>
+
