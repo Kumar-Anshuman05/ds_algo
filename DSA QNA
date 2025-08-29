@@ -196,3 +196,61 @@ int main()
     cout << n << " th position of fibonacci series is: " << fibonacci(n) << endl;
 }
 
+abhi bhai question
+#include <iostream>
+#include <cstdint>  
+#include <limits>     
+#include <cstring>    
+
+using namespace std;
+
+const int ARRAY_SIZE = 10;
+const int NAME_MAX_LENGTH = 30;
+struct Person
+{
+    char name[NAME_MAX_LENGTH];
+    uint8_t age;
+};
+void get_persons(Person persons[], int size)
+{
+    for (int i = 0; i < size; ++i) 
+    {
+        cout << "Enter details for person " << i + 1 << ":" << endl;
+        cout << "Name (max 30 characters): ";
+        cin.getline(persons[i].name, NAME_MAX_LENGTH);
+        while (true)
+        {
+            int temp_age;
+            cout << "Age (0-255): ";
+            if (cin >> temp_age && temp_age >= 0 && temp_age <= 255) 
+            {
+                persons[i].age = static_cast<uint8_t>(temp_age);
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                break;
+            } 
+            else
+            {
+                cout << "Invalid input. Please enter a number between 0 and 255." << endl;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
+        }
+    }
+}
+void print_persons(const Person persons[], int size) 
+{
+    cout << "\n--- List of Persons ---\n";
+    for (int i = 0; i < size; ++i) 
+    {
+        cout << "Person " << i + 1 << ":\n";
+        cout << "Name: " << persons[i].name << endl;
+        cout << "Age: " << static_cast<int>(persons[i].age) << endl;
+        cout << "--------------------------" << endl;
+    }
+}
+int main() 
+{
+    Person persons_array[ARRAY_SIZE];
+    get_persons(persons_array, ARRAY_SIZE);
+    print_persons(persons_array, ARRAY_SIZE);
+}
